@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "app.js",
+        "src": "vercel_server.js",
         "use": "@vercel/node"
       },
       {
@@ -13,7 +13,7 @@
     "routes": [
       {
         "src": "/",
-        "dest": "app.js"
+        "dest": "vercel_server.js"
       },
       {
         "src": "/paginas/(.*)",
@@ -21,7 +21,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "app.js"
+        "dest": "vercel_server.js"
       }
     ]
   }

@@ -171,7 +171,7 @@ app.post('/actualizarProducto', (req, res) => {
 
 app.set('port', 4000);
 
-export default con; 
+export { app, con };
 
 app.listen(app.get('port'),()=>{
 

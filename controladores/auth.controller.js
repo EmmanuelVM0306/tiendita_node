@@ -1,6 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
 import bcryptjs from 'bcryptjs';
-import con from '../app.js';
+import {con} from '../app.js';
 import { promisify } from 'util';
 import dotenv from 'dotenv';
 
