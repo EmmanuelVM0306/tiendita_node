@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Actualizar Producto</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Actualizar Producto</h2>
+        <form action="/actualizarProducto" method="post" class="mt-3">
+            <div class="form-group">
+                <label for="idProducto">Seleccione un producto:</label>
+                <select name="idProducto" id="idProducto" class="form-control" onchange="cargarDatosProducto(this.value)">
+                    <option value="">Seleccione un producto...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nombre">Nombre del producto:</label>
+                <input type="text" name="nombre" required id="nombre" class="form-control" placeholder="Nombre del producto">
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio del producto:</label>
+                <input type="number" required min="0" max="500" name="precio" id="precio" class="form-control" placeholder="Precio del producto">
+            </div>
+            <div class="form-group">
+                <label for="existencia">Existencia del producto:</label>
+                <input type="number" required min="0" max="500" name="existencia" id="existencia" class="form-control" placeholder="Existencia del producto">
+            </div>
+            <button type="submit" class="btn btn-success">Actualizar producto</button>
+        </form>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                fetch('/obtenerProducto')
+                    .then(response => response.json())
+                    .then(data => {
+                        const selectProducto = document.getElementById('idProducto');
+                        let options = '<option value="">Seleccione un producto...</option>';
+                        data.forEach(producto => {
+                            options += `<option value="${producto.id_productos}">${producto.nombre}</option>`;
+                        });
+                        selectProducto.innerHTML = options;
+                    })
+                    .catch(error => console.error('Error fetching products:', error));
+            });
+
+            function cargarDatosProducto(idProducto) {
+                fetch('/obtenerDatosProducto/' + idProducto)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('nombre').value = data.nombre || '';
+                        document.getElementById('precio').value = data.precio || '';
+                        document.getElementById('existencia').value = data.existencia || '';
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        </script>
+        <a href="/" class="btn btn-primary mt-3">Regresar</a>
+    </div>
+</body>
+</html>

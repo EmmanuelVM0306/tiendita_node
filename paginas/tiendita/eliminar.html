@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Eliminar Productos</title>
+    <style>
+        .td{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <form id="eliminarForm" action="/eliminarProductosSeleccionados" method="post">
+            <table id="productos-table" class="table table-striped table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Existencia</th>
+                        <th>Seleccionar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Productos -->
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-danger">Eliminar seleccionados</button>
+        </form>
+        <a href="/" class="btn btn-primary mt-2">Regresar</a>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/obtenerProducto')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#productos-table tbody');
+                    let rows = '';
+                    data.forEach(producto => {
+                        rows += `
+                            <tr>
+                                <td>${producto.id_productos}</td>
+                                <td>${producto.nombre}</td>
+                                <td>${producto.precio}</td>
+                                <td>${producto.existencia}</td>
+                                <td class="td"><input type="checkbox" class="form-check-input" name="idProducto[]" value="${producto.id_productos}"></td>
+                            </tr>`;
+                    });
+                    tableBody.innerHTML = rows;
+                })
+                .catch(error => console.error('Error fetching products:', error));
+        });
+    </script>
+</body>
+</html>

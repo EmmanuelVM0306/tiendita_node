@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="app.js" defer></script>
+    <title>Agregar productos</title>
+    <link rel="stylesheet" href="estilo2.css">
+    <style>
+        .enlaces{
+            display: flex;
+            flex-direction: row;
+        }
+        .enlaces > * {
+            margin-right: 15px;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <h1>Inventario de productos de tiendita</h1>
+    
+    <form action="/agregarProducto" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre del producto:</label>
+            <input type="text" required name="nombre" placeholder="Nombre del producto">
+        </div>
+        
+    <div class="form-group">
+        <label for="precio">Precio del producto (0-500):</label>
+        <input type="number" required ="0" max="500" name="precio" placeholder="Precio del producto">
+    </div>
+    
+    <div class="form-group">
+        <label for="nombre">Existencia del producto (0-500):</label>
+        <input type="number" required min="0" max="500" name="existencia" placeholder="Existencia del producto">
+    </div>
+    
+    <input type="submit" value="Agregar producto" class="btn btn-primary">
+    <br>
+    
+    
+    </form>
+    <br>
+    <div class="enlaces">
+        <a href="/consultarProductos"><button class="btn btn-secondary">Obtener Productos</button></a>
+        <br>
+        <a href="/eliminarProductos"><button class="btn btn-secondary">Eliminar Productos</button></a>
+        <br>
+        <a href="/actualizarProductos"><button class="btn btn-secondary">Actualizar Productos</button></a>
+    </div>
+    <br>
+    <div class="enlaces">
+        <a href="logout"><button class="btn btn-secondary">Cerrar sesión</button></a>
+    </div>
+
+</body>
+</html>

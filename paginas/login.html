@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilo2.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 50px;
+            align-items: center;
+        }
+        .form-login {
+            max-width: 380px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        .form-login .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-login input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .form-login input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .form-login-btn {
+            margin-top: 10px;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Inicio de sesión para el almacen de tiendita</h1>
+        <form class="form-login" action="/loginform" method="POST" id="login-form">
+            <h2 class="text-center">Inicio de Sesión</h2>
+            <div class="form-group">
+                <label for="correo" class="sr-only">Correo electrónico</label>
+                <input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" required autofocus maxlength="44">
+            </div>
+            <div class="form-group">
+                <label for="contrasena" class="sr-only">Contraseña</label>
+                <input type="password" name="contrasena" id="contrasena" class="form-control" placeholder="Contraseña" required minlength="6" maxlength="12">
+            </div>
+            <input class="btn btn-lg btn-primary btn-block form-login-btn" type="submit" value="Iniciar sesión">
+            <br>
+            <div class="error" id="error"></div>
+        </form>
+        <p>¿Aún no tienes una cuenta? - <a href="/registro">Registrarse</a></p>
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const correo = document.getElementById('correo').value;
+            const contrasena = document.getElementById('contrasena').value;
+            const response = await fetch('/loginform', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ correo, contrasena })
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            const errorDiv = document.getElementById('error');
+            if(response.ok){
+                window.location.href = '/agregarProducto';
+            }else{
+                errorDiv.innerHTML = data.message;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "app.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "paginas/**/*.html",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/",
+        "dest": "app.js"
+      },
+      {
+        "src": "/paginas/(.*)",
+        "dest": "/paginas/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "app.js"
+      }
+    ]
+  }
+  
