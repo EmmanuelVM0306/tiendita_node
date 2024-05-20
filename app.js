@@ -86,7 +86,7 @@ app.post('/agregarProducto', (req, res) => {
         <p class="lead">Producto: ${nombre}</p>
         <p>Precio: ${precio}</p>
         <p>Existencia: ${existencia}</p>
-        <a href="/" class="btn btn-primary">Regresar</a>
+        <a href="/agregarProducto" class="btn btn-primary">Regresar</a>
     </div>
 </body>
 </html>
@@ -160,7 +160,7 @@ app.post('/actualizarProducto', (req, res) => {
 <body>
     <div class="container mt-4">
         <h1 class="text-success">Producto actualizado con éxito</h1>
-        <a href="/" class="btn btn-primary">Regresar</a>
+        <a href="/agregarProducto" class="btn btn-primary">Regresar</a>
     </div>
 </body>
 </html>
